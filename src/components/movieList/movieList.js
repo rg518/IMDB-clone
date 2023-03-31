@@ -7,6 +7,17 @@ const MovieList = () => {
   const [movieList, setMovieList] = useState([]);
   const { type } = useParams();
 
+  let str = "";
+  if (type) {
+    for (let letter of type) {
+      if (letter === "_") {
+        str += " ";
+      } else {
+        str += letter;
+      }
+    }
+  }
+
   useEffect(() => {
     getData();
   }, []);
@@ -27,7 +38,7 @@ const MovieList = () => {
 
   return (
     <div className="movie__list">
-      <h2 className="list__title">{(type ? type : "POPULAR").toUpperCase()}</h2>
+      <h2 className="list__title">{(str ? str : "POPULAR").toUpperCase()}</h2>
       <div className="list__cards">
         {movieList.map((movie) => (
           <Cards movie={movie} />
